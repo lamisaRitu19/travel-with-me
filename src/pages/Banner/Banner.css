@@ -1,0 +1,6 @@
+.bg-banner {
+    background-image: url("../../assets/images/Rectangle\ 1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150vh;
+}
