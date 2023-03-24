@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +9,8 @@ import { toast } from 'react-hot-toast';
 const Register = () => {
     const { registerUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const [error, setError] = useState('');
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -34,11 +36,15 @@ const Register = () => {
                     const user = result.user;
                     console.log('Registered user', user);
                     toast.success('You have successfully created an account!');
-                    handleUpdateUserProfile(fname, lname, photoURL)
+                    handleUpdateUserProfile(fname, lname, photoURL);
                     form.reset();
+                    setError('');
                     navigate('/');
                 })
-                .catch(error => console.error('Registered user error', error))
+                .catch(error => {
+                    console.error('Registered user error', error);
+                    setError(error.message);
+                })
         }
     }
 
@@ -83,6 +89,8 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                     <Form.Control type="password" name='confirmPassword' placeholder="Confirm Password" className='border-0 border-bottom rounded-0' required />
                 </Form.Group>
+
+                <Form.Text className='text-danger'>{error}</Form.Text>
 
                 <Button variant="primary" type="submit" className='w-100 mt-4 mb-3'>
                     Register

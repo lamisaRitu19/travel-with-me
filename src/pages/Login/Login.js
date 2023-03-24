@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,8 +8,11 @@ import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
 
 const Login = () => {
-    const { logInUser } = useContext(AuthContext);
+    const { logInUser, passwordReset } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const [userEmail, setUserEmail] = useState('');
+    const [error, setError] = useState('');
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -21,11 +24,31 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log('Logged in user', user);
-                form.reset()
+                form.reset();
+                setError('');
                 toast.success('Successfully logged in!');
                 navigate('/');
             })
-            .catch(error => console.error('Logged in error', error))
+            .catch(error => {
+                console.error('Logged in error', error);
+                setError(error.message);
+            })
+    }
+
+    const handleEmailBlur = event => {
+        const email = event.target.value;
+        setUserEmail(email);
+    }
+
+    const handleForgetPassword = () => {
+        passwordReset(userEmail)
+            .then(() => {
+                console.log('Password reset email sent');
+                toast.success('Password reset has been sent.')
+            })
+            .catch(error => {
+                setError(error.message);
+            })
     }
 
     return (
@@ -33,14 +56,16 @@ const Login = () => {
             <Form onSubmit={handleSubmit} className='mx-auto mt-5 mb-3 px-5 pt-5 pb-4 text-start border border-3 rounded form-width'>
                 <h4 className='mb-4 fw-bold'>Login</h4>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control type="email" name='email' placeholder="Email" className='border-0 border-bottom rounded-0' />
+                    <Form.Control onBlur={handleEmailBlur} type="email" name='email' placeholder="Email" className='border-0 border-bottom rounded-0' required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control type="password" name='password' placeholder="Password" className='border-0 border-bottom rounded-0' />
+                    <Form.Control type="password" name='password' placeholder="Password" className='border-0 border-bottom rounded-0' required />
                 </Form.Group>
 
-                <Button variant="link">Forgot password?</Button>
+                <Button onClick={handleForgetPassword} variant="link">Forgot password?</Button>
+
+                <Form.Text className='text-danger'>{error}</Form.Text>
 
                 <Button variant="primary" type="submit" className='w-100 mt-4 mb-3'>
                     Log In

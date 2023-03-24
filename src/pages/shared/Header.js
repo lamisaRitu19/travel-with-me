@@ -45,14 +45,20 @@ const Header = () => {
                         </Nav>
                     </Navbar.Collapse>
                     {
-                        user?.uid ?
-                            <Nav className='ms-5 d-flex align-items-center'>
-                                <img src={user.photoURL} alt="" className='rounded-circle' style={{ width: '30px' }} />
-                                <p className='text-white fs-5 fw-semibold ms-2 me-4 mb-0'>{user.displayName}</p>
-                                <Button onClick={handleLogOut} variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser>Sign Out</Button>
-                            </Nav>
-                            :
-                            <Button as={Link} to='/login' variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser> Sign In</Button>
+                        user?.displayName && <Nav className='ms-5 d-flex align-items-center'>
+                            <img src={user.photoURL} alt="" className='rounded-circle' style={{ width: '30px' }} />
+                            <p className='text-white fs-5 fw-semibold ms-2 me-4 mb-0'>{user.displayName}</p>
+                            <Button onClick={handleLogOut} variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser>Sign Out</Button>
+                        </Nav>
+                    }
+                    {
+                        user?.displayName === null && <Nav className='ms-5 d-flex align-items-center'>
+                            <p className='text-white fs-5 fw-semibold me-4 mb-0'>{user.email}</p>
+                            <Button onClick={handleLogOut} variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser>Sign Out</Button>
+                        </Nav>
+                    }
+                    {
+                        user === null && <Button as={Link} to='/login' variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser> Sign In</Button>
                     }
                 </Container>
             </Navbar>
