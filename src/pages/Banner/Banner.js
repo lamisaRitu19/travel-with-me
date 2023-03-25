@@ -14,19 +14,19 @@ const Banner = () => {
     }, [])
 
     return (
-        <Carousel>
+        <Carousel fade>
             {
                 photos.map(photo =>
                     <Carousel.Item key={photo.id}>
                         <img
-                            className="d-block w-100"
-                            style={{ height: '100vh' }}
+                            className="d-block w-100 bg-carousel"
                             src={photo.urls.full}
                             alt="First slide"
                         />
-                        <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <Carousel.Caption className='fs-5'>
+                            <p>Hello! This is</p>
+                            <h3 className='fs-1'>Lamisa Ferdous</h3>
+                            <p>Welcome to <span className='fs-4'>Travel With Me</span>.</p>
                         </Carousel.Caption>
                     </Carousel.Item>)
             }

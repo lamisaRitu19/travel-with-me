@@ -19,7 +19,7 @@ const Header = () => {
     }
 
     return (
-        <div style={{ background: `url("../../assets/images/sunset1.jpg")` }}>
+        <div>
             <Navbar bg="dark" variant="dark">
                 <Container>
                     <Nav>

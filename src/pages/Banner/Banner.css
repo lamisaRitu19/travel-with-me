@@ -1,6 +1,14 @@
-.bg-banner {
-    background-image: url("../../assets/images/Rectangle\ 1.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 150vh;
+.bg-carousel {
+    /* background-color: rgba(0, 0, 0, 0.9); */
+    /* opacity: 0.8; */
+    height: 90vh;
+    object-fit: cover;
+    /* position: fixed;
+    z-index: -1;
+    top: 0; */
+}
+
+.carousel-caption {
+    margin-top: -100px;
+
 }
