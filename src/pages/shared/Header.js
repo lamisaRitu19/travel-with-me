@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { FaLuggageCart, FaMapSigns, FaRegEnvelope, FaFacebook, FaInstagram, FaGithub, FaRegUser } from "react-icons/fa";
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import { HashLink } from 'react-router-hash-link';
 import './Header.css';
 
 const Header = () => {
@@ -42,7 +43,7 @@ const Header = () => {
                         <Nav className="mx-auto py-2 align-items-center fw-semibold">
                             <NavLink as={Link} to='/' className='px-3 py-2 mx-2 rounded navlink'>Home</NavLink>
                             <NavLink as={Link} to='/about' className='px-3 py-2 mx-2 rounded navlink'>About</NavLink>
-                            <NavLink as={Link} to='/services' className='px-3 py-2 mx-2 rounded navlink'>Services</NavLink>
+                            <HashLink to='#services' className='px-3 py-2 mx-2 rounded navlink'>Services</HashLink>
                             <NavLink as={Link} to='/blogs' className='px-3 py-2 mx-2 rounded navlink'>Blogs</NavLink>
                         </Nav>
                     </Navbar.Collapse>
