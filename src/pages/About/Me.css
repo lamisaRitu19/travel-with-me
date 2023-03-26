@@ -1,0 +1,19 @@
+.position-ab {
+    position: absolute;
+    left: 0;
+    width: 660px;
+    z-index: -1;
+}
+
+.img-height {
+    height: 460px;
+}
+
+@media screen and (max-width: 991px) {
+    .position-ab {
+        position: absolute;
+        left: 0;
+        width: 460px;
+        z-index: -1;
+    }
+}

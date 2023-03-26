@@ -33,36 +33,36 @@ const Header = () => {
                     </Nav>
                 </Container>
             </Navbar> */}
-            <Navbar fixed="top" variant="dark" expand="lg" className='bg-purple'>
+            <Navbar fixed="top" variant="dark" expand="lg" className='bg-blue'>
                 <Container>
-                    <Navbar.Brand href="#home" className='d-flex align-items-center'>
-                        <FaLuggageCart className='fs-3 me-2 text-pink'></FaLuggageCart>Travel With Me<FaMapSigns className='ms-2 text-pink'></FaMapSigns>
+                    <Navbar.Brand as={Link} to='/' className='d-flex align-items-center'>
+                        <FaLuggageCart className='fs-3 me-2 text-orange'></FaLuggageCart>Travel With Me<FaMapSigns className='ms-2 text-orange'></FaMapSigns>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mx-auto py-2 align-items-center fw-semibold">
-                            <NavLink as={Link} to='/' className='px-3 py-2 mx-2 rounded navlink'>Home</NavLink>
-                            <NavLink as={Link} to='/about' className='px-3 py-2 mx-2 rounded navlink'>About</NavLink>
-                            <HashLink to='#services' className='px-3 py-2 mx-2 rounded navlink'>Services</HashLink>
-                            <NavLink as={Link} to='/blogs' className='px-3 py-2 mx-2 rounded navlink'>Blogs</NavLink>
+                            <NavLink to='/' className='px-3 py-2 mx-2 rounded navlink'>Home</NavLink>
+                            <NavLink to='/about' className='px-3 py-2 mx-2 rounded navlink'>About</NavLink>
+                            <HashLink smooth to='/home/#services' className='px-3 py-2 mx-2 rounded navlink'>Services</HashLink>
+                            <NavLink to='/blogs' className='px-3 py-2 mx-2 rounded navlink'>Blogs</NavLink>
                         </Nav>
+                        {
+                            user?.displayName && <Nav className=' d-flex align-items-center'>
+                                <img src={user.photoURL} alt="" className='rounded-circle' style={{ width: '30px' }} />
+                                <p className='text-orange fs-5 fw-semibold ms-2 me-4 mb-3 mb-md-0 text-pink'>{user.displayName}</p>
+                                <Button onClick={handleLogOut} variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser>Sign Out</Button>
+                            </Nav>
+                        }
+                        {
+                            user?.displayName === null && <Nav className='d-flex align-items-center'>
+                                <p className='text-orange fs-5 fw-semibold me-4 mb-3 mb-md-0 text-pink'>{user.email}</p>
+                                <Button onClick={handleLogOut} variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser>Sign Out</Button>
+                            </Nav>
+                        }
+                        {
+                            user === null && <Button as={Link} to='/login' variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser> Sign In</Button>
+                        }
                     </Navbar.Collapse>
-                    {
-                        user?.displayName && <Nav className='ms-5 d-flex align-items-center'>
-                            <img src={user.photoURL} alt="" className='rounded-circle' style={{ width: '30px' }} />
-                            <p className='text-white fs-5 fw-semibold ms-2 me-4 mb-0 text-pink'>{user.displayName}</p>
-                            <Button onClick={handleLogOut} variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser>Sign Out</Button>
-                        </Nav>
-                    }
-                    {
-                        user?.displayName === null && <Nav className='ms-5 d-flex align-items-center'>
-                            <p className='text-white fs-5 fw-semibold me-4 mb-0 text-pink'>{user.email}</p>
-                            <Button onClick={handleLogOut} variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser>Sign Out</Button>
-                        </Nav>
-                    }
-                    {
-                        user === null && <Button as={Link} to='/login' variant="outline-light" className='d-flex align-items-center justify-content-center'><FaRegUser className='fs-5 me-2'></FaRegUser> Sign In</Button>
-                    }
                 </Container>
             </Navbar>
         </div>

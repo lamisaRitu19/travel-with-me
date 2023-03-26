@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import { FaLuggageCart, FaMapSigns } from "react-icons/fa";
 import './Banner.css';
 
 const Banner = () => {
@@ -17,16 +18,20 @@ const Banner = () => {
         <Carousel fade>
             {
                 photos.map(photo =>
-                    <Carousel.Item key={photo.id}>
+                    <Carousel.Item key={photo.id} className='shadow-lg'>
                         <img
-                            className="d-block w-100 bg-carousel"
+                            className="d-block w-100 shadow-lg bg-carousel"
                             src={photo.urls.full}
                             alt="First slide"
                         />
-                        <Carousel.Caption className='fs-5'>
-                            <p>Hello! This is</p>
-                            <h3 className='fs-1'>Lamisa Ferdous</h3>
-                            <p>Welcome to <span className='fs-4'>Travel With Me</span>.</p>
+                        <Carousel.Caption className=''>
+                            <p className='fs-3 mb-2 fw-semibold'>Welcome to</p>
+                            <h1 className='font-size-60 fw-light'>
+                                <FaLuggageCart className='d-none d-md-inline me-4'></FaLuggageCart>
+                                Travel With Me
+                                <FaMapSigns className='d-none d-md-inline ms-4'></FaMapSigns>
+                            </h1>
+                            <p className='fs-4'>Let's explore!</p>
                         </Carousel.Caption>
                     </Carousel.Item>)
             }

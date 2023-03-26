@@ -9,21 +9,42 @@
 }
 
 .active {
-    color: #ffa1f2;
+    color: #f1bd68;
 }
 
-.bg-purple {
-    background-color: #27112c;
+.bg-blue {
+    background-color: #06193e;
 }
 
-.text-pink {
-    color: #ffa1f2;
+.text-grey {
+    color: rgb(106, 106, 106);
 }
 
-/* 
-#47204F
-#6C3878
-#C059B2
-#0F2A5F
-#365653
- */
+.text-blue {
+    color: #06193e;
+}
+
+.text-orange {
+    color: #f1bd68;
+}
+
+.text-dark-orange {
+    color: #f29e18;
+}
+
+.font-size-60 {
+    font-size: 60px;
+}
+
+.shadow-grey {
+    box-shadow: 30px 20px 40px 80px rgb(236, 247, 255);
+}
+
+
+.abc {
+    color: #47204F;
+    color: #6C3878;
+    color: #C059B2;
+    color: #0F2A5F;
+    color: #365653;
+}
