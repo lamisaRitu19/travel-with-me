@@ -16,6 +16,11 @@
     background-color: #06193e;
 }
 
+.bg-blue-transparent {
+    background-color: #06193e4f;
+    box-shadow: 0 10px 40px 20px #06193e4f;
+}
+
 .bg-light-orange {
     background-color: #fff0d7;
 }

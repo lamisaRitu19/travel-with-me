@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { toast } from 'react-hot-toast';
-import { FaLuggageCart, FaMapSigns, FaRegEnvelope, FaFacebook, FaInstagram, FaGithub, FaRegUser } from "react-icons/fa";
+import { FaLuggageCart, FaMapSigns, FaRegUser } from "react-icons/fa";
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import { HashLink } from 'react-router-hash-link';
@@ -12,6 +12,19 @@ import './Header.css';
 
 const Header = () => {
     const { user, logOutUser } = useContext(AuthContext);
+
+    const [navbar, setNavbar] = useState(false);
+
+    const changeBackground = () => {
+        if (window.scrollY >= 80) {
+            setNavbar(true);
+        }
+        else {
+            setNavbar(false);
+        }
+    }
+
+    window.addEventListener('scroll', changeBackground);
 
     const handleLogOut = () => {
         logOutUser()
@@ -21,19 +34,7 @@ const Header = () => {
 
     return (
         <div>
-            {/* <Navbar bg="dark" variant="dark">
-                <Container>
-                    <Nav>
-                        <Nav.Link href="#home" className='d-flex align-items-center'><FaRegEnvelope className='fs-5 me-2'></FaRegEnvelope>Contact Me</Nav.Link>
-                    </Nav>
-                    <Nav className="ms-auto">
-                        <Nav.Link href="https://www.facebook.com/lamisa.ritu19/" className='px-2'><FaFacebook></FaFacebook></Nav.Link>
-                        <Nav.Link href="https://www.instagram.com/lamisa_ritu/?next=%2F" className='px-2'><FaInstagram></FaInstagram></Nav.Link>
-                        <Nav.Link href="https://github.com/lamisaRitu19" className='px-2'><FaGithub></FaGithub></Nav.Link>
-                    </Nav>
-                </Container>
-            </Navbar> */}
-            <Navbar fixed="top" variant="dark" expand="lg" className='bg-blue'>
+            <Navbar fixed="top" variant="dark" expand="lg" className={navbar ? 'bg-blue' : 'bg-blue-transparent'}>
                 <Container>
                     <Navbar.Brand as={Link} to='/' className='d-flex align-items-center'>
                         <FaLuggageCart className='fs-3 me-2 text-orange'></FaLuggageCart>Travel With Me<FaMapSigns className='ms-2 text-orange'></FaMapSigns>
