@@ -28,7 +28,7 @@ const ServiceBooking = () => {
                 <Form.Control type="text" name='phone' placeholder="Phone number" className='border-0 border-bottom rounded-0' required />
             </Form.Group>
 
-            <Button variant="primary" type="submit" className='w-100 mt-4 mb-3'>
+            <Button variant="primary" type="submit" className='w-100 mt-4 mb-3 login-button' style={{ background: "#f29e18", border: "0" }}>
                 Submit
             </Button>
         </Form>

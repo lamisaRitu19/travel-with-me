@@ -5,7 +5,7 @@ import './Blogs.css';
 const Blogs = () => {
     return (
         <div className='container py-5 my-5'>
-            <h3 className='fs-1 pt-5 mb-4'>My Blogs</h3>
+            <h3 className='fs-1 fw-bold pt-5 mb-4 text-blue'>My Blogs</h3>
             <Accordion className='mx-auto pb-5 rounded blog-width'>
                 <Accordion.Item eventKey="0" className='border border-3'>
                     <Accordion.Header>What is the difference between authorization and authentication?</Accordion.Header>

@@ -13,8 +13,8 @@ const Services = () => {
     console.log(services);
 
     return (
-        <div className='container my-5 pt-3' id='services'>
-            <h3 className='pt-5 mb-4'>The places I visit with my clients</h3>
+        <div className='mt-5 pb-5 bg-light-orange shadow-orange' id='services'>
+            <h3 className='fs-1 fw-semibold pt-5 mb-4'>The places I explore...</h3>
             <Container>
                 <Row>
                     {

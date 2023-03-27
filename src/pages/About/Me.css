@@ -1,19 +1,36 @@
-.position-ab {
+.position-home {
     position: absolute;
     left: 0;
     width: 660px;
     z-index: -1;
 }
 
-.img-height {
+.position-about {
+    position: absolute;
+    left: 60px;
+    width: 460px;
+    z-index: -1;
+}
+
+.img-height-home {
     height: 460px;
 }
 
+.img-height-about {
+    width: 480px;
+}
+
 @media screen and (max-width: 991px) {
-    .position-ab {
-        position: absolute;
-        left: 0;
+
+    .position-home {
         width: 460px;
-        z-index: -1;
+    }
+
+    .position-about {
+        left: 0;
+    }
+
+    .img-height-about {
+        width: 380px;
     }
 }

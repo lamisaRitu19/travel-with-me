@@ -52,9 +52,9 @@ const Login = () => {
     }
 
     return (
-        <div className='container'>
+        <div className='container py-5 my-5'>
             <Form onSubmit={handleSubmit} className='mx-auto mt-5 mb-3 px-5 pt-5 pb-4 text-start border border-3 rounded form-width'>
-                <h4 className='mb-4 fw-bold'>Login</h4>
+                <h2 className='mb-4 fw-bold text-green'>Login</h2>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control onBlur={handleEmailBlur} type="email" name='email' placeholder="Email" className='border-0 border-bottom rounded-0' required />
                 </Form.Group>
@@ -63,21 +63,21 @@ const Login = () => {
                     <Form.Control type="password" name='password' placeholder="Password" className='border-0 border-bottom rounded-0' required />
                 </Form.Group>
 
-                <Button onClick={handleForgetPassword} variant="link">Forgot password?</Button>
+                <Button onClick={handleForgetPassword} variant="link" className=' text-decoration-none' style={{ color: "#06193e" }}>Forgot password?</Button>
 
                 <Form.Text className='text-danger'>{error}</Form.Text>
 
-                <Button variant="primary" type="submit" className='w-100 mt-4 mb-3'>
+                <Button variant="primary" type="submit" className='w-100 mt-4 mb-3 login-button' style={{ background: "#f29e18", border: "0" }}>
                     Log In
                 </Button>
-                <p className='text-center mb-0'>Don't have an account? <Link to='/register'>Create an account</Link></p>
+                <p className='text-center text-grey mb-0'>Don't have an account? <Link to='/register' className='text-blue text-decoration-none'>Create an account</Link></p>
             </Form>
             <div className='d-flex justify-content-center align-items-center'>
                 <span className='me-2' style={{ width: '200px' }}><hr /></span>
                 <p className='m-0'>Or</p>
                 <span className='ms-2' style={{ width: '200px' }}><hr /></span>
             </div>
-            <Button variant="outline-secondary" className='mx-auto mt-3 mb-5 d-flex align-items-center'><FaGoogle className='fs-4 me-2'></FaGoogle> Continue with Google</Button>
+            <Button variant="outline-success" className='mx-auto mt-3 mb-5 d-flex align-items-center'><FaGoogle className='fs-4 me-2'></FaGoogle> Continue with Google</Button>
         </div>
     );
 };
