@@ -1,15 +1,25 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import './Login.css';
 import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-    const { logInUser, passwordReset } = useContext(AuthContext);
+    const {
+        setLoading,
+        logInUser,
+        passwordReset,
+        googleSignIn
+    } = useContext(AuthContext);
+    const provider = new GoogleAuthProvider();
+
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const [userEmail, setUserEmail] = useState('');
     const [error, setError] = useState('');
@@ -26,12 +36,20 @@ const Login = () => {
                 console.log('Logged in user', user);
                 form.reset();
                 setError('');
-                toast.success('Successfully logged in!');
-                navigate('/');
+                if (user.emailVerified) {
+                    navigate(from, { replace: true });
+                    toast.success('Successfully logged in!');
+                }
+                else {
+                    toast.error('Please verify your email address!');
+                }
             })
             .catch(error => {
                 console.error('Logged in error', error);
                 setError(error.message);
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }
 
@@ -47,6 +65,21 @@ const Login = () => {
                 toast.success('Password reset has been sent.')
             })
             .catch(error => {
+                setError(error.message);
+            })
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn(provider)
+            .then(result => {
+                const user = result.user;
+                console.log('Google logged in user', user);
+                setError('');
+                toast.success('Successfully logged in with google!');
+                navigate('/');
+            })
+            .catch(error => {
+                console.error('Google logged in error', error);
                 setError(error.message);
             })
     }
@@ -77,7 +110,7 @@ const Login = () => {
                 <p className='m-0'>Or</p>
                 <span className='ms-2' style={{ width: '200px' }}><hr /></span>
             </div>
-            <Button variant="outline-success" className='mx-auto mt-3 mb-5 d-flex align-items-center'><FaGoogle className='fs-4 me-2'></FaGoogle> Continue with Google</Button>
+            <Button onClick={handleGoogleSignIn} variant="outline-success" className='mx-auto mt-3 mb-5 d-flex align-items-center'><FaGoogle className='fs-4 me-2'></FaGoogle> Continue with Google</Button>
         </div>
     );
 };

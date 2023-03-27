@@ -5,9 +5,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
-    const { registerUser, updateUserProfile } = useContext(AuthContext);
+    const {
+        registerUser,
+        updateUserProfile,
+        googleSignIn,
+        emailVerification
+    } = useContext(AuthContext);
+    const provider = new GoogleAuthProvider();
     const navigate = useNavigate();
 
     const [error, setError] = useState('');
@@ -35,10 +42,12 @@ const Register = () => {
                 .then(result => {
                     const user = result.user;
                     console.log('Registered user', user);
-                    toast.success('You have successfully created an account!');
-                    handleUpdateUserProfile(fname, lname, photoURL);
-                    form.reset();
                     setError('');
+                    form.reset();
+                    handleUpdateUserProfile(fname, lname, photoURL);
+                    handleEmailVerification();
+                    toast.success('Please verify your email address!');
+                    toast.success('You have successfully created an account!');
                     navigate('/');
                 })
                 .catch(error => {
@@ -60,6 +69,27 @@ const Register = () => {
                 console.error('Updated user error', error);
                 toast.error('There were some errors in updating your profile!')
             })
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn(provider)
+            .then(result => {
+                const user = result.user;
+                console.log('Google logged in user', user);
+                setError('');
+                toast.success('Successfully logged in with google!');
+                navigate('/');
+            })
+            .catch(error => {
+                console.error('Google logged in error', error);
+                setError(error.message);
+            })
+    }
+
+    const handleEmailVerification = () => {
+        emailVerification()
+            .then(() => { })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -102,7 +132,7 @@ const Register = () => {
                 <p className='m-0'>Or</p>
                 <span className='ms-2' style={{ width: '200px' }}><hr /></span>
             </div>
-            <Button variant="outline-success" className='mx-auto mt-3 mb-5 d-flex align-items-center'><FaGoogle className='fs-4 me-2'></FaGoogle> Continue with Google</Button>
+            <Button onClick={handleGoogleSignIn} variant="outline-success" className='mx-auto mt-3 mb-5 d-flex align-items-center'><FaGoogle className='fs-4 me-2'></FaGoogle> Continue with Google</Button>
         </div>
     );
 };
